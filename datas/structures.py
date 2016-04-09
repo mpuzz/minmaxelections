@@ -32,13 +32,26 @@ class Solution :
 	def __init__(self) :
 		self.parties = {}
 		self.seatsassigned = 0
-
+		self.partieslist = []
 	def addparty(self, party, seats) :
 		self.parties[party] = seats
 		self.seatsassigned = self.seatsassigned + seats
+		self.partieslist.append(party)
 
 	def clone(self) :
 		newsolution = Solution()
 		for key, value in self.parties.iteritems() :
 			newsolution.addparty(key, value)
 		return newsolution
+	def removelast(self):
+		del self.parties[self.partieslist.pop()]
+		#print(len(self.parties))
+	def printparties(self):
+		seats = 0
+		n = 0
+		for key in self.partieslist:
+			n = n + 1
+			print(key.name, str(self.parties[key]))
+			seats = seats + self.parties[key]
+		print(seats, n)
+		
