@@ -31,4 +31,4 @@ print("Total seats " + str(totalseats))
 sethares(allparties, totalvotes, totalseats)
 calculator = calculateseats.Calculator(allparties, coalitions, totalseats)
 calculator.haresrespectingsolution()
-
+print(str(len(calculator.solutions)) + " solutions found")

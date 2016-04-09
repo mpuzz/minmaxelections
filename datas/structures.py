@@ -43,9 +43,9 @@ class Solution :
 		for key, value in self.parties.iteritems() :
 			newsolution.addparty(key, value)
 		return newsolution
-	def removelast(self):
-		del self.parties[self.partieslist.pop()]
-		#print(len(self.parties))
+	def remove(self, party):
+		self.seatsassigned = self.seatsassigned - self.parties[party]
+		del self.parties[party]
 	def printparties(self):
 		seats = 0
 		n = 0
