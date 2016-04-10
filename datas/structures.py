@@ -10,6 +10,7 @@ class Party :
 	def sethares(self, totalseats, totalvotes):
 		self.minhare = int(math.floor(self.votes * float(totalseats)/totalvotes))
 		self.maxhare = int(math.ceil(self.votes * float(totalseats)/totalvotes))
+		self.percentage = float(self.votes)/totalvotes
 
 
 class Coalition :
@@ -32,11 +33,9 @@ class Solution :
 	def __init__(self) :
 		self.parties = {}
 		self.seatsassigned = 0
-		self.partieslist = []
 	def addparty(self, party, seats) :
 		self.parties[party] = seats
 		self.seatsassigned = self.seatsassigned + seats
-		self.partieslist.append(party)
 
 	def clone(self) :
 		newsolution = Solution()
@@ -54,4 +53,12 @@ class Solution :
 			print(key.name, str(self.parties[key]))
 			seats = seats + self.parties[key]
 		print(seats, n)
-		
+	def calculatemaxerror(self) :
+		maxerr = 0
+		for party in self.parties :
+			err = abs(party.percentage - (float(self.parties[party])/self.seatsassigned))
+			if err > maxerr :
+				maxerr = err
+				a = party
+		self.maxerr = maxerr
+		return maxerr

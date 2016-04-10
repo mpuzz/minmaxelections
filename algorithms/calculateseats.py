@@ -7,7 +7,6 @@ class Calculator :
 		self.parties = sorted(parties, key=lambda x: x.votes, reverse=True)
 		self.coalitions = coalitions
 		self.seatstoassign = seats
-
 	def haresrespectingsolution(self):
 		self.solutions = []
 		sol = structures.Solution()
@@ -38,3 +37,17 @@ class Calculator :
 	def addsolution(self, solution) :
 		newsolution = solution.clone()
 		self.solutions.append(newsolution)
+
+	def minimizeerror(self) :
+		minerr = 100
+		solutions = []
+		for x in self.solutions :
+        		err = x.calculatemaxerror()
+			if err == minerr :
+				solutions.append(x)
+			if err < minerr :
+				solutions = []
+				solutions.append(x)
+				minerr = err
+		self.solutions = solutions
+		return minerr

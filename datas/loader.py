@@ -1,5 +1,6 @@
 from . import structures
 import os.path
+import re
 
 class Loader :
 	def __init__(self, filename) :
@@ -14,15 +15,15 @@ class Loader :
 	def close(self) :
 		self.file.close()
 
-	def readFile(self) :
+	def readFile(self, separator=";") :
 		coalitions = []
 		lines = self.file.readlines()
 		coalition = None
 		for line in lines :
-			fields = line.split(";")
+			fields = line.split(separator)
 			if len(fields) != 6 :
 				continue
-			if fields[0] == "ITALIA" :
+			if fields[0].startswith("ITALIA") :
 				if fields[1] != "" :
 					coalition = structures.Coalition(fields[1])
 					coalitions.append(coalition)
