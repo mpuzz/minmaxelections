@@ -4,6 +4,7 @@ import sys
 from datas import structures
 from datas import loader
 from algorithms import calculateseats
+from datas import writer
 
 def sethares(parties, votes, seats):
 	for x in parties:
@@ -33,3 +34,6 @@ calculator.haresrespectingsolution()
 print(str(len(calculator.solutions)) + " solutions found")
 print("Minimum error: " + str(calculator.minimizeerror()))
 print(str(len(calculator.solutions)) + " solutions that minimize the error")
+wr = writer.Writer("output.csv")
+wr.writesolution(calculator.solutions[0])
+wr.close()
